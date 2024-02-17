@@ -17,7 +17,7 @@ st.header("ColorAlchemy")
 on = st.toggle("ENG|TR")
 
 information = """
-**ColorAlchemy** is a powerful yet intuitive image compression tool that lets
+ColorAlchemy is a powerful yet intuitive image compression tool that lets
 you transform your images into stunning works of digital art. With
 ColorAlchemy, you can adjust the number of colors in your images to create
 captivating visual effects. Whether you're a photographer, designer, or 
