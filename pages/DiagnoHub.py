@@ -6,6 +6,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+from googletrans import Translator
 import time
 
 st.set_page_config(
@@ -17,6 +18,9 @@ st.set_page_config(
 
 st.title("DiagnoHub")
 
+
+on = st.toggle("ENG|TR")
+
 information = """
     DiagnoHub is an innovative healthcare application designed to empower users 
     with accurate and personalized disease diagnosis. Using advanced machine learning
@@ -27,6 +31,15 @@ information = """
     clarity on a more serious condition, DiagnoHub provides reliable insights to aid 
     in your healthcare journey. Take control of your health today with DiagnoHub.
 """
+def translate(text, src_lang='en', dest_lang='tr'):
+    translator = Translator()
+    translated_text = translator.translate(text, src=src_lang, dest=dest_lang)
+    return translated_text.text
+
+if on:
+    information = translate(information)
+else:
+    information = information
 
 def stream_data():
     for word in information.split(" "):
@@ -77,10 +90,6 @@ def predict_disease(symptoms): # strings with separated coma
     input_data = np.array(input_data).reshape(1,-1)
 
     return data_dict["predictions_classes"][model.predict(input_data)[0]]
-
-on = st.toggle("ENG|TR")
-if on:
-    st.warning("At the moment, this feature is not available for use.")
 
 with st.form("Symptoms", clear_on_submit=True):
     x = st.multiselect("Symptoms", symptom_index.keys())
