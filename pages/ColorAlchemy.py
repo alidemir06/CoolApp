@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import time
+from googletrans import Translator
 import io
 
 st.set_page_config(
@@ -12,6 +13,8 @@ st.set_page_config(
 )
 
 st.header("ColorAlchemy")
+
+on = st.toggle("ENG|TR")
 
 information = """
 **ColorAlchemy** is a powerful yet intuitive image compression tool that lets
@@ -24,11 +27,19 @@ detail. Upload your images, choose the desired number of colors, and let
 ColorAlchemy work its magic to produce beautifully compressed images ready
 for sharing or printing.
 """
+def translate(text, src_lang='en', dest_lang='tr'):
+    translator = Translator()
+    translated_text = translator.translate(text, src=src_lang, dest=dest_lang)
+    return translated_text.text
+if on:
+    information = translate(information)
+else:
+    information = information
+
 def stream_data():
     for word in information.split(" "):
         yield word + " "
         time.sleep(0.03)
-
 if st.button("Learn More", type="secondary"):
     st.write_stream(stream_data())
     st.snow()
