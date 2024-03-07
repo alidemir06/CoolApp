@@ -1,9 +1,6 @@
 import streamlit as st
 
 
-
-import streamlit as st
-
 st.set_page_config(
     page_title="Exstreamly Cool App",
     page_icon="🧊",
@@ -11,18 +8,16 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-st.markdown("""
-<style>
-.css-d1b1ld.edgvbvh6
-{
-    visibility: hidden;
-}
-.css-1v8iw71.eknhn3m4
-{
-    visibility: hidden;
-}
-</style>
-""", unsafe_allow_html= True)
+
+
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
 
 st.title("Main Page")
 
